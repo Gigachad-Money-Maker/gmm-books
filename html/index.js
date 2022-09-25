@@ -2,7 +2,6 @@ window.addEventListener('message', function(event) {
     if (event.data.show == true) {
         if (event.data.pages) {
             $.each(event.data.pages, function(i, page) {
-                console.log('"img/' + event.data.book + '/' + page.pageName + '.png"')
                 if (page.source === 'local') {
                     if (page.type === 'hard') {
                         $('#inner').append('<div class="hard"><img src="img/' + event.data.book + '/' + page.pageName + '.png" width=' + event.data.size.width + ' height=' + event.data.size.height + '></div>');
