@@ -1,0 +1,36 @@
+Thank you purchasing our Books script. There are several things that you will need to do to make a unique book within the script.
+
+The first is to add an item entry to your shared items file.
+```['book_name']                 = {['name'] = 'book_name',                        ['label'] = 'Book',         ['weight'] = 0,         ['type'] = 'item',         ['image'] = 'book.png',         ['unique'] = true,             ['useable'] = true,     ['shouldClose'] = true,   ['combinable'] = nil,   ['description'] = 'A book'},```
+
+The next is to add an entry to the config within the books script, detailing information about the book, like the number and types of pages, the type of model spawned when the book is opened, and more. As of the current version, the config will look like this:
+
+['book_name'] = {
+    ['pages'] = {
+        { pageName = "cover", type = 'hard', source = 'local' }, --Front Cover
+        { pageName = "1", type = 'hard', source = 'local' }, --Inside Front Cover
+        { pageName = "2", type = 'normal', source = 'local' }, --Page 2
+        { pageName = "3", type = 'normal', source = 'local' }, --Page 3
+        { pageName = "4", type = 'hard', source = 'local' }, --Inside Rear Cover
+        { pageName = "backcover", type = 'hard', source = 'local' }, --Rear Cover
+    },
+    ['prop'] = 'book', --ex. book, map
+    ['size'] = {
+        ['width'] = 800, --page image width
+        ['height'] = 600, --page image height
+    },
+},
+
+The key 'book_name' should match the item name you added to your shared file and also the folder name you will need to add, containing the page images. In the example above the item name is 'book_name' and contains 6 pngs, with a model prop of book. All the images are sourced locally from the server.
+
+Page Name
+This is the file name of the png, without the extension, in the folder you have designated. In the example above, the files were named '1.png', '2.png', 'cover.png' and so on.
+
+Page Type
+The page type determines how the page will appear and turn. Typically, for a hard cove book, you will want the first and last 2 pages to be 'hard' type, as it gives a rigid "hard cover" appearance and page turn behavior. A type of 'normal' will make the page appear soft and flimsy.
+
+Web Images
+You can also choose to use images hosted on the web, by setting the 'source' as 'web' and setting the 'pageName' as the url of the image.
+```{ pageName = "https://dunb17ur4ymx4.cloudfront.net/webstore/logos/4569ba6d96629a6a1f597591c0427950aa1a57eb.png", type = 'hard', source = 'web' }, --Front Cover```
+
+
