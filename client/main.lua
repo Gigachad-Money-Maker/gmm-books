@@ -1,8 +1,7 @@
 local bookProp = nil
 
 local function PlayAnimation(dict, name, duration)
-    RequestAnimDict(dict)
-    while not HasAnimDictLoaded(dict) do Wait(0) end
+    lib.requestAnimDict(dict)
     TaskPlayAnim(PlayerPedId(), dict, name, 1.0, -1.0, duration, 49, 1, false, false, false)
     RemoveAnimDict(dict)
 end
@@ -39,8 +38,10 @@ AddEventHandler('onResourceStop', function(resourceName)
             show = false
         })
         ClearPedSecondaryTask(PlayerPedId())
-        SetEntityAsMissionEntity(bookProp)
-        DeleteObject(bookProp)
+        if bookProp then
+            SetEntityAsMissionEntity(bookProp)
+            DeleteObject(bookProp)
+        end
     end
 end)
 
