@@ -1,5 +1,3 @@
-Thank you purchasing our Books script. There are several things that you will need to do to make a unique book within the script.
-
 The first is to add an item entry to your shared items file.
 ```['book_name']                 = {['name'] = 'book_name',                        ['label'] = 'Book',         ['weight'] = 0,         ['type'] = 'item',         ['image'] = 'book.png',         ['unique'] = true,             ['useable'] = true,     ['shouldClose'] = true,   ['combinable'] = nil,   ['description'] = 'A book'},```
 

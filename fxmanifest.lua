@@ -6,6 +6,7 @@ lua54 'yes'
 ui_page 'html/index.html'
 
 shared_scripts {
+    '@ox_lib/init.lua',
 	'config.lua',
 }
 
@@ -22,8 +23,4 @@ files {
     "html/*.css",
     "html/*.js",
     'html/img/**/*.png',
-}
-
-escrow_ignore {
-    'config.lua',
 }

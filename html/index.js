@@ -1,20 +1,12 @@
 window.addEventListener('message', function(event) {
     if (event.data.show == true) {
         if (event.data.pages) {
-            $.each(event.data.pages, function(i, page) {
-                if (page.source === 'local') {
-                    if (page.type === 'hard') {
-                        $('#inner').append('<div class="hard"><img src="img/' + event.data.book + '/' + page.pageName + '.png" width=' + event.data.size.width + ' height=' + event.data.size.height + '></div>');
-                    } else if (page.type === 'normal') {
-                        $('#inner').append('<div><img src="img/' + event.data.book + '/' + page.pageName + '.png" width=' + event.data.size.width + ' height=' + event.data.size.height + '></div>');
-                    }
-                } else if (page.source === 'web') {
-                    if (page.type === 'hard') {
-                        $('#inner').append('<div class="hard"><img src="' + page.pageName + '" width=' + event.data.size.width + ' height=' + event.data.size.height + '></div>');
-                    } else if (page.type === 'normal') {
-                        $('#inner').append('<div><img src="' + page.pageName + '" width=' + event.data.size.width + ' height=' + event.data.size.height + '></div>');
-                    }
-                }
+            $.each(event.data.pages, function(_, page) {
+                const imgSrc = page.source === 'local' ? 'img/' + event.data.book + '/' + page.pageName + '.png' : page.pageName;
+                
+                $('#inner').append(
+                    `<div${page.type === 'hard' ? ' class="hard"' : ''}><img src="${imgSrc}" width=${event.data.size.width} height=${event.data.size.height}></div>`
+                );
             });
 
             $('#inner').turn({
@@ -35,8 +27,10 @@ window.addEventListener('message', function(event) {
     $(document).keyup(function(e) {
         if (e.keyCode == 27) {
             $('body').css('display', 'none');
-            $('#inner').turn('page', 1);
-            $('#inner').turn('destroy');
+            if ($('#inner').turn('is')) {
+                $('#inner').turn('page', 1);
+                $('#inner').turn('destroy');
+            }
             inner.style = "";
             $.post(`https://${GetParentResourceName()}/escape`, JSON.stringify({}));
         }
